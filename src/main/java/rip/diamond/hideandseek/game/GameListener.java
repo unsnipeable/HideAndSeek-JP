@@ -4,7 +4,10 @@ import me.goodestenglish.api.util.Common;
 import me.libraryaddict.disguise.DisguiseAPI;
 import org.bukkit.Difficulty;
 import org.bukkit.GameMode;
+import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.attribute.Attribute;
+import org.bukkit.block.Block;
 import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -16,12 +19,17 @@ import org.bukkit.event.player.*;
 import org.bukkit.event.weather.WeatherChangeEvent;
 import org.bukkit.event.world.ChunkLoadEvent;
 import org.bukkit.event.world.WorldLoadEvent;
+import org.bukkit.inventory.ItemStack;
 import rip.diamond.hideandseek.Config;
 import rip.diamond.hideandseek.HideAndSeek;
+import rip.diamond.hideandseek.Items;
+import rip.diamond.hideandseek.enums.DisguiseTypes;
+import rip.diamond.hideandseek.enums.GameRole;
 import rip.diamond.hideandseek.enums.GameState;
 import rip.diamond.hideandseek.event.GamePlayerDeathEvent;
 import rip.diamond.hideandseek.player.GamePlayer;
 import rip.diamond.hideandseek.util.PlayerUtil;
+import rip.diamond.hideandseek.util.Util;
 
 public class GameListener implements Listener {
 
@@ -56,7 +64,7 @@ public class GameListener implements Listener {
 
         event.quitMessage(Common.text("<gray>[<red>-<gray>] <yellow>" + player.getName()));
 
-        if (game.canEnd()) {
+        if (game.isStarted() && game.canEnd()) {
             game.end();
         }
     }
@@ -207,8 +215,30 @@ public class GameListener implements Listener {
     public void onInteract(PlayerInteractEvent event) {
         Player player = event.getPlayer();
         Action action = event.getAction();
+        ItemStack itemStack = event.getItem();
+        Block block = event.getClickedBlock();
+        Game game = HideAndSeek.INSTANCE.getGame();
+        GamePlayer gamePlayer = game.getGamePlayer(player);
+
         if (player.getGameMode() != GameMode.CREATIVE && action == Action.RIGHT_CLICK_BLOCK) {
             event.setCancelled(true);
+            return;
+        }
+        if (game.isStarted()) {
+            if (game.getGamePlayer(player).getRole() == GameRole.HIDER) {
+                if (itemStack != null) {
+                    if (itemStack.equals(Items.TRANSFORM_TOOL.getItem()) && block != null && block.getType() != Material.AIR) {
+                        gamePlayer.getDisguises().setType(DisguiseTypes.BLOCK);
+                        gamePlayer.getDisguises().setData(block.getType().name());
+                        gamePlayer.getDisguises().setDisguise(Util.disguise(player));
+                        Common.sendMessage(player, "<yellow>你已變身成為 <aqua>" + block.getType().name());
+                    } else if (itemStack.equals(Items.TELEPORT_TOOL.getItem())) {
+                        Location blockLoc = player.getLocation().getBlock().getLocation().clone();
+                        player.teleport(new Location(blockLoc.getWorld(), blockLoc.getX() + 0.5, blockLoc.getY(), blockLoc.getZ() + 0.5, player.getLocation().getYaw(), player.getLocation().getPitch()));
+                        Common.sendMessage(player, "<yellow>已成功固定!");
+                    }
+                }
+            }
         }
     }
 

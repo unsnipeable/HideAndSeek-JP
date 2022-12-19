@@ -29,7 +29,7 @@ public class GamePlayer {
 
     public void setDisguises(DisguiseData disguises) {
         this.disguises = disguises;
-        Common.sendMessage(getPlayer(), "<yellow>如果你是躲藏者, 你將會在遊戲裏偽裝成為<aqua>" + disguises.getName() + "<yellow>!");
+        Common.sendMessage(getPlayer(), "<yellow>如果你是躲藏者, 你將會在遊戲裏偽裝成為<aqua>" + disguises.getData() + "<yellow>!");
     }
 
     public Player getPlayer() {

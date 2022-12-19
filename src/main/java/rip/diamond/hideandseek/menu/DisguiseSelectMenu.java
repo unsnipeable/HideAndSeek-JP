@@ -32,35 +32,31 @@ public class DisguiseSelectMenu extends PaginatedMenu {
             return buttons;
         }
 
-        for (String data : HideAndSeek.INSTANCE.getMapFile().getStringList("maps." + game.getSettings().getMap() + ".disguises.blocks")) {
-            String block = data.split(":")[0];
-            String name = data.split(":")[1];
+        for (String block : HideAndSeek.INSTANCE.getMapFile().getStringList("maps." + game.getSettings().getMap() + ".disguises.blocks")) {
             buttons.put(buttons.size(), new Button() {
                 @Override
                 public ItemStack getButtonItem(Player player) {
-                    return new ItemBuilder(Material.valueOf(block)).name("<green>" + name).lore("", "<yellow>點擊選擇偽裝成為該方塊!").build();
+                    return new ItemBuilder(Material.valueOf(block)).name("<green>" + block).lore("", "<yellow>點擊選擇偽裝成為該方塊!").build();
                 }
 
                 @Override
                 public void clicked(Player player, ClickType clickType) {
-                    game.getGamePlayer(player).setDisguises(new DisguiseData(DisguiseTypes.BLOCK, block, name));
+                    game.getGamePlayer(player).setDisguises(new DisguiseData(DisguiseTypes.BLOCK, block));
                     player.closeInventory();
                 }
             });
         }
 
-        for (String data : HideAndSeek.INSTANCE.getMapFile().getStringList("maps." + game.getSettings().getMap() + ".disguises.mobs")) {
-            String mob = data.split(":")[0];
-            String name = data.split(":")[1];
+        for (String mob : HideAndSeek.INSTANCE.getMapFile().getStringList("maps." + game.getSettings().getMap() + ".disguises.mobs")) {
             buttons.put(buttons.size(), new Button() {
                 @Override
                 public ItemStack getButtonItem(Player player) {
-                    return new ItemBuilder(Material.valueOf(mob + "_SPAWN_EGG")).name("<green>" + name).lore("", "<yellow>點擊選擇偽裝成為該生物!").build();
+                    return new ItemBuilder(Material.valueOf(mob + "_SPAWN_EGG")).name("<green>" + mob).lore("", "<yellow>點擊選擇偽裝成為該生物!").build();
                 }
 
                 @Override
                 public void clicked(Player player, ClickType clickType) {
-                    game.getGamePlayer(player).setDisguises(new DisguiseData(DisguiseTypes.MOB, mob, name));
+                    game.getGamePlayer(player).setDisguises(new DisguiseData(DisguiseTypes.MOB, mob));
                     player.closeInventory();
                 }
             });

@@ -2,8 +2,8 @@ maps:
   Diamond:
     disguises:
       blocks:
-        - "DIAMOND_BLOCK:鑽石方塊"
-        - "GOLD_BLOCK:黃金方塊"
-        - "SAND:沙"
+        - "DIAMOND_BLOCK"
+        - "GOLD_BLOCK"
+        - "SAND"
       mobs:
-        - "COW:牛"
+        - "COW"

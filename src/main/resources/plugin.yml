@@ -3,6 +3,6 @@ version: '${version}'
 main: rip.diamond.hideandseek.HideAndSeek
 api-version: 1.19
 author: GoodestEnglish
-depend:
+softdepend:
   - LibsDisguises
   - ProtocolLib

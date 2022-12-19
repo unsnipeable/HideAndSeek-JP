@@ -39,6 +39,7 @@ public final class HideAndSeek extends JavaPlugin {
         new RoleSelectCommand();
         new SetLobbyCommand();
         new SettingsCommand();
+        new StopDisguiseCommand();
         new StopTaskCommand();
     }
 
