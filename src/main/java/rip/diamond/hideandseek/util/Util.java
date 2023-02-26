@@ -1,16 +1,15 @@
 package rip.diamond.hideandseek.util;
 
 import me.goodestenglish.api.util.Common;
-import me.libraryaddict.disguise.disguisetypes.Disguise;
-import me.libraryaddict.disguise.disguisetypes.DisguiseType;
-import me.libraryaddict.disguise.disguisetypes.MiscDisguise;
-import me.libraryaddict.disguise.disguisetypes.MobDisguise;
 import org.bukkit.GameRule;
 import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.WorldCreator;
 import org.bukkit.entity.Player;
 import rip.diamond.hideandseek.HideAndSeek;
+import rip.diamond.hideandseek.disguise.Disguise;
+import rip.diamond.hideandseek.disguise.impl.MiscDisguise;
+import rip.diamond.hideandseek.disguise.impl.MobDisguise;
 import rip.diamond.hideandseek.enums.DisguiseTypes;
 import rip.diamond.hideandseek.game.disguise.DisguiseData;
 import rip.diamond.hideandseek.player.GamePlayer;
@@ -23,7 +22,7 @@ import java.util.Random;
 
 public class Util {
 
-    public static final List<Integer> ANNOUNCE = Arrays.asList(300, 240, 180, 120, 60, 30, 20, 10, 5, 4, 3, 2, 1);
+    public static final List<Integer> ANNOUNCE = Arrays.asList(600, 500, 400, 300, 240, 180, 120, 60, 30, 20, 10, 5, 4, 3, 2, 1);
 
     public static <T> T random(T... objects) {
         int i = new Random().nextInt(objects.length);
@@ -99,13 +98,11 @@ public class Util {
         DisguiseData disguiseData = gamePlayer.getDisguises();
 
         if (disguiseData.getType() == DisguiseTypes.BLOCK) {
-            MiscDisguise disguise = new MiscDisguise(DisguiseType.FALLING_BLOCK, Material.valueOf(disguiseData.getData()));
-            disguise.setEntity(player);
+            MiscDisguise disguise = new MiscDisguise(player, Material.valueOf(disguiseData.getData()));
             disguise.startDisguise();
             return disguise;
         } else if (disguiseData.getType() == DisguiseTypes.MOB) {
-            MobDisguise disguise = new MobDisguise(DisguiseType.valueOf(disguiseData.getData()));
-            disguise.setEntity(player);
+            MobDisguise disguise = new MobDisguise(player, disguiseData.getData());
             disguise.startDisguise();
             return disguise;
         }

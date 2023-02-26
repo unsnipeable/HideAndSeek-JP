@@ -27,7 +27,6 @@ dependencies {
     paperweightDevelopmentBundle("io.papermc.paper:dev-bundle:1.19.2-R0.1-SNAPSHOT")
 
     compileOnly 'io.papermc.paper:paper-api:1.19.2-R0.1-SNAPSHOT'
-    compileOnly name: 'LibsDisguises-10.0.31-Free'
     implementation 'rip.diamond:api:1.6:dev-all'
 
     // Lombok

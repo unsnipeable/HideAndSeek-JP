@@ -41,6 +41,7 @@ public final class HideAndSeek extends JavaPlugin {
         new SettingsCommand();
         new StopDisguiseCommand();
         new StopTaskCommand();
+        new TestCommand();
     }
 
     @Override

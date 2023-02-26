@@ -1,7 +1,6 @@
 package rip.diamond.hideandseek.game;
 
 import me.goodestenglish.api.util.Common;
-import me.libraryaddict.disguise.DisguiseAPI;
 import org.bukkit.Difficulty;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
@@ -144,6 +143,9 @@ public class GameListener implements Listener {
     @EventHandler
     public void onLoad(ChunkLoadEvent event) {
         for (Entity entity : event.getChunk().getEntities()) {
+            if (entity instanceof Player) {
+                continue;
+            }
             entity.remove();
         }
     }
@@ -228,6 +230,7 @@ public class GameListener implements Listener {
             if (game.getGamePlayer(player).getRole() == GameRole.HIDER) {
                 if (itemStack != null) {
                     if (itemStack.equals(Items.TRANSFORM_TOOL.getItem()) && block != null && block.getType() != Material.AIR) {
+                        gamePlayer.getDisguises().getDisguise().stopDisguise();
                         gamePlayer.getDisguises().setType(DisguiseTypes.BLOCK);
                         gamePlayer.getDisguises().setData(block.getType().name());
                         gamePlayer.getDisguises().setDisguise(Util.disguise(player));

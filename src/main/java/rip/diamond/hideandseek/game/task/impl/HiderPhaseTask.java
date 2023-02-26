@@ -15,7 +15,7 @@ public class HiderPhaseTask extends GameTask {
     public void onRun() {
         if (tick == 0) {
             cancel();
-            game.startSeekerPhase(300);
+            game.startSeekerPhase(600);
         }
         if (Util.ANNOUNCE.contains(tick)) {
             Common.broadcastSound(Sound.UI_BUTTON_CLICK);

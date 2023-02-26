@@ -6,6 +6,7 @@ import me.goodestenglish.api.util.command.CommandArgs;
 import me.goodestenglish.api.util.command.argument.CommandArguments;
 import me.goodestenglish.api.util.serialization.LocationSerialization;
 import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import rip.diamond.hideandseek.HideAndSeek;
 
