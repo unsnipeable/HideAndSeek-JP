@@ -3,6 +3,7 @@ package rip.diamond.hideandseek.game.task.impl;
 import me.goodestenglish.api.util.Common;
 import net.kyori.adventure.bossbar.BossBar;
 import org.bukkit.Sound;
+import rip.diamond.hideandseek.Config;
 import rip.diamond.hideandseek.game.task.GameTask;
 import rip.diamond.hideandseek.util.Util;
 
@@ -15,7 +16,7 @@ public class HiderPhaseTask extends GameTask {
     public void onRun() {
         if (tick == 0) {
             cancel();
-            game.startSeekerPhase(600);
+            game.startSeekerPhase(Config.GAME_TIME_SECOND);
         }
         if (Util.ANNOUNCE.contains(tick)) {
             Common.broadcastSound(Sound.UI_BUTTON_CLICK);

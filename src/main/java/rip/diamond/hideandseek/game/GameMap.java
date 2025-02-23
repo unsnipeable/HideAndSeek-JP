@@ -4,7 +4,6 @@ import lombok.Getter;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
-import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import rip.diamond.hideandseek.HideAndSeek;
 import rip.diamond.hideandseek.util.Util;
@@ -37,7 +36,7 @@ public class GameMap {
     }
 
     public void teleport(Player player) {
-        player.teleport(new Location(world, 0, world.getHighestBlockYAt(0, 0), 0));
+        player.teleport(world.getSpawnLocation());
     }
 
 }
