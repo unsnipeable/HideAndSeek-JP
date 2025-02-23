@@ -74,7 +74,8 @@ public class GameListener implements Listener {
             event.setCancelled(true);
             return;
         }
-        if (event.getCause() != EntityDamageEvent.DamageCause.ENTITY_ATTACK) {
+
+        if (event.getCause() != EntityDamageEvent.DamageCause.ENTITY_ATTACK && event.getCause() != EntityDamageEvent.DamageCause.PROJECTILE) {
             event.setCancelled(true);
             return;
         }
@@ -105,6 +106,11 @@ public class GameListener implements Listener {
                 return;
             }
 
+            if (gameEntity.getRole() == GameRole.SEEKER) {
+                event.setDamage(0);
+                return;
+            }
+
             // TODO: 17/12/2022 Reveal block
         }
     }
@@ -117,10 +123,15 @@ public class GameListener implements Listener {
         Player player = event.getPlayer();
         GamePlayer gamePlayer = game.getGamePlayer(player);
 
-        gamePlayer.setDead(true);
+        Common.broadcastMessage(gamePlayer.getRole().getColor() + player.getName() + "<red>已被擊殺，變成了" + GameRole.SEEKER.getColoredName());
+
         gamePlayer.getDisguises().getDisguise().stopDisguise();
-        player.setHealth(player.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue());
-        player.setGameMode(GameMode.SPECTATOR);
+        gamePlayer.setRole(GameRole.SEEKER);
+        game.getMap().teleport(player);
+        player.getInventory().setContents(GameRole.SEEKER.getTools());
+
+        Common.sendMessage(player, "","<yellow>基於你已被" + GameRole.SEEKER.getColoredName() + "<yellow>發現，你現在是" + gamePlayer.getRole().getColoredName() + "<yellow>!");
+        Common.sendMessage(player, "<yellow>獲勝目標: <dark_aqua>" + gamePlayer.getRole().getGoal());
 
         if (game.canEnd()) {
             game.end();
@@ -222,7 +233,7 @@ public class GameListener implements Listener {
         Game game = HideAndSeek.INSTANCE.getGame();
         GamePlayer gamePlayer = game.getGamePlayer(player);
 
-        if (player.getGameMode() != GameMode.CREATIVE && action == Action.RIGHT_CLICK_BLOCK) {
+        if (player.getGameMode() != GameMode.CREATIVE && action == Action.RIGHT_CLICK_BLOCK && block != null && block.getType() == Material.CHEST) {
             event.setCancelled(true);
             return;
         }

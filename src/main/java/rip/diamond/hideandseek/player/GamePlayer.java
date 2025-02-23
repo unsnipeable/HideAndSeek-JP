@@ -19,12 +19,10 @@ public class GamePlayer {
     private final UUID uniqueID;
     private GameRole role = GameRole.NONE;
     private DisguiseData disguises;
-    private boolean dead = false;
 
     public void reset() {
         role = GameRole.NONE;
         disguises = null;
-        dead = false;
     }
 
     public void setDisguises(DisguiseData disguises) {

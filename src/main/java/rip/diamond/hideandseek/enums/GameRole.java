@@ -15,15 +15,7 @@ public enum GameRole {
             Items.TELEPORT_TOOL.getItem()
     }),
     SEEKER("尋找者", "<red>", "在限時之內找到所有的躲藏者", new ItemStack[]{
-            Items.NETHERITE_SWORD.getItem(),
-            Items.BOW.getItem(),
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            Items.ARROW.getItem()
+            Items.NETHERITE_SWORD.getItem()
     });
 
     private final String name;

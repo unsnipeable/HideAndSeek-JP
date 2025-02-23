@@ -14,7 +14,7 @@ public class EndTask extends GameTask {
     public EndTask() {
         super(10);
 
-        if (game.getPlayers().values().stream().noneMatch(gp -> gp.getRole() == GameRole.HIDER && !gp.isDead())) {
+        if (game.getPlayers().values().stream().noneMatch(gp -> gp.getRole() == GameRole.HIDER)) {
             winner = GameRole.SEEKER;
         } else {
             winner = GameRole.HIDER;

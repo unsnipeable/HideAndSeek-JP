@@ -7,7 +7,6 @@ import me.goodestenglish.api.util.command.CommandArgs;
 import me.goodestenglish.api.util.command.argument.CommandArguments;
 import org.bukkit.entity.Player;
 import rip.diamond.hideandseek.HideAndSeek;
-import rip.diamond.hideandseek.enums.GameRole;
 
 public class CountdownCommand extends Command {
     @CommandArgs(name = "countdown", permission = "hideandseek.command.countdown")

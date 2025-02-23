@@ -152,7 +152,7 @@ public class Game {
     }
 
     public boolean canEnd() {
-        return players.values().stream().noneMatch(gp -> gp.getRole() == GameRole.HIDER && !gp.isDead()) || players.values().stream().noneMatch(gp -> gp.getRole() == GameRole.SEEKER && !gp.isDead());
+        return players.values().stream().noneMatch(gp -> gp.getRole() == GameRole.HIDER) || players.values().stream().noneMatch(gp -> gp.getRole() == GameRole.SEEKER);
     }
 
     public GamePlayer getGamePlayer(Player player) {
