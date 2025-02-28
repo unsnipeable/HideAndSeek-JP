@@ -1,5 +1,6 @@
 package rip.diamond.hideandseek.game;
 
+import me.goodestenglish.api.util.CC;
 import me.goodestenglish.api.util.Common;
 import org.bukkit.*;
 import org.bukkit.block.Block;
@@ -15,6 +16,7 @@ import org.bukkit.event.weather.WeatherChangeEvent;
 import org.bukkit.event.world.ChunkLoadEvent;
 import org.bukkit.event.world.WorldLoadEvent;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.util.BoundingBox;
 import rip.diamond.hideandseek.Config;
 import rip.diamond.hideandseek.HideAndSeek;
 import rip.diamond.hideandseek.Items;
@@ -247,10 +249,18 @@ public class GameListener implements Listener {
             event.setCancelled(true);
             return;
         }
+
         if (game.isStarted()) {
             if (game.getGamePlayer(player).getRole() == GameRole.HIDER) {
                 if (itemStack != null) {
-                    if (itemStack.equals(Items.TRANSFORM_TOOL.getItem()) && block != null && block.getType() != Material.AIR) {
+                    if (itemStack.equals(Items.TRANSFORM_TOOL.getItem()) && block != null && block.getType() != Material.AIR && block.getType() != Material.BARRIER) {
+                        BoundingBox box = block.getBoundingBox();
+
+                        if (box.getVolume() != 1) {
+                            Common.sendMessage(player, "<red>你只能變身成為一個完整的方塊!");
+                            return;
+                        }
+
                         gamePlayer.getDisguises().getDisguise().stopDisguise();
                         gamePlayer.getDisguises().setType(DisguiseTypes.BLOCK);
                         gamePlayer.getDisguises().setData(block.getType().name());
