@@ -1,24 +1,25 @@
 package rip.diamond.hideandseek.disguise.impl;
 
 import lombok.Getter;
+import org.bukkit.Bukkit;
+import org.bukkit.Location;
 import org.bukkit.Material;
-import org.bukkit.entity.ArmorStand;
-import org.bukkit.entity.EntityType;
-import org.bukkit.entity.FallingBlock;
-import org.bukkit.entity.Player;
+import org.bukkit.entity.*;
+import org.bukkit.metadata.FixedMetadataValue;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Vector;
 import rip.diamond.hideandseek.HideAndSeek;
 import rip.diamond.hideandseek.disguise.Disguise;
+import rip.diamond.hideandseek.game.Game;
 
 @Getter
 public class MiscDisguise extends Disguise {
 
     private final Material material;
-    private ArmorStand armorStand;
-    private FallingBlock fallingBlock;
+
+    private BlockDisplay blockDisplay;
 
     public MiscDisguise(Player player, Material material) {
         super(player);
@@ -34,29 +35,19 @@ public class MiscDisguise extends Disguise {
             throw new UnsupportedOperationException("The selected material " + material.name() + " is not a block");
         }
 
-        fallingBlock = player.getLocation().getWorld().spawnFallingBlock(player.getLocation(), material, (byte) 0);
-        fallingBlock.setGravity(false);
-        fallingBlock.setDropItem(false);
-        fallingBlock.setHurtEntities(false);
-        fallingBlock.setInvulnerable(true);
-        fallingBlock.setPersistent(true);
-        fallingBlock.setSilent(true);
-        fallingBlock.setVelocity(new Vector(0,0,0));
-        fallingBlock.setTicksLived(1);
-
-        armorStand = (ArmorStand) player.getLocation().getWorld().spawnEntity(player.getLocation(), EntityType.ARMOR_STAND);
-        armorStand.setGravity(false);
-        armorStand.setInvisible(true);
-        armorStand.setMarker(true);
-        armorStand.addPassenger(fallingBlock);
+        blockDisplay = player.getLocation().getWorld().spawn(player.getLocation(), BlockDisplay.class, display -> {
+            display.setBlock(Bukkit.createBlockData(material));
+            display.setMetadata(Game.DISGUISE_KEY, new FixedMetadataValue(HideAndSeek.INSTANCE, player.getUniqueId()));
+        });
 
         task = new BukkitRunnable() {
             @Override
             public void run() {
-                fallingBlock.setTicksLived(1);
-                armorStand.eject();
-                armorStand.teleport(player.getLocation());
-                armorStand.addPassenger(fallingBlock);
+                Location location = player.getLocation().clone().add(-0.5, 0, -0.5);
+                location.setYaw(0);
+                location.setPitch(0);
+
+                blockDisplay.teleport(location);
             }
         }.runTaskTimer(HideAndSeek.INSTANCE, 0, 1L);
     }
@@ -67,7 +58,6 @@ public class MiscDisguise extends Disguise {
         player.setCollidable(true);
 
         task.cancel();
-        fallingBlock.remove();
-        armorStand.remove();
+        blockDisplay.remove();
     }
 }

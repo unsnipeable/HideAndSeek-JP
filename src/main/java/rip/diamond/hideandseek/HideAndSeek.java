@@ -4,7 +4,6 @@ import lombok.Getter;
 import me.goodestenglish.api.DiamondAPI;
 import me.goodestenglish.api.util.BasicConfigFile;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.spongepowered.configurate.objectmapping.meta.Setting;
 import rip.diamond.hideandseek.command.*;
 import rip.diamond.hideandseek.game.Game;
 import rip.diamond.hideandseek.game.GameListener;

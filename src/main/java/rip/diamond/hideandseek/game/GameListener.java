@@ -1,11 +1,7 @@
 package rip.diamond.hideandseek.game;
 
 import me.goodestenglish.api.util.Common;
-import org.bukkit.Difficulty;
-import org.bukkit.GameMode;
-import org.bukkit.Location;
-import org.bukkit.Material;
-import org.bukkit.attribute.Attribute;
+import org.bukkit.*;
 import org.bukkit.block.Block;
 import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
@@ -29,6 +25,8 @@ import rip.diamond.hideandseek.event.GamePlayerDeathEvent;
 import rip.diamond.hideandseek.player.GamePlayer;
 import rip.diamond.hideandseek.util.PlayerUtil;
 import rip.diamond.hideandseek.util.Util;
+
+import java.util.UUID;
 
 public class GameListener implements Listener {
 
@@ -80,17 +78,29 @@ public class GameListener implements Listener {
             return;
         }
 
-        if (event.getEntity() instanceof Player player) {
-            double health = player.getHealth();
-            if (health - event.getDamage() > 0) {
-                return;
-            }
-            GamePlayerDeathEvent e = new GamePlayerDeathEvent(player);
-            e.callEvent();
-            if (e.isCancelled()) {
-                event.setDamage(0);
-            }
+        Entity entity = event.getEntity();
+        Player player;
+
+        if (entity instanceof Player) {
+            player = (Player) entity;
+        } else if (entity.hasMetadata(Game.DISGUISE_KEY)) {
+            player = Bukkit.getPlayer((UUID) entity.getMetadata(Game.DISGUISE_KEY).getFirst().value());
+        } else {
+            player = null;
+        }
+
+        if (player == null) {
             return;
+        }
+
+        double health = player.getHealth();
+        if (health - event.getDamage() > 0) {
+            return;
+        }
+        GamePlayerDeathEvent e = new GamePlayerDeathEvent(player);
+        e.callEvent();
+        if (e.isCancelled()) {
+            event.setDamage(0);
         }
     }
 

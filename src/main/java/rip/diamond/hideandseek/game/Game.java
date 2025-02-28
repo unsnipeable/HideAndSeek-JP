@@ -25,6 +25,9 @@ import java.util.*;
 @Getter
 @Setter
 public class Game {
+
+    public static final String DISGUISE_KEY = "disguise";
+
     private final Map<UUID, GamePlayer> players = new HashMap<>();
     private GameMap map = new GameMap();
     private GameSettings settings = new GameSettings();
