@@ -53,7 +53,6 @@ public class Util {
         if(src.isDirectory()){
             if(!dest.exists()){
                 dest.mkdir();
-                Common.log("<yellow>正在複製資料夾... 由 <white>" + src + "  <yellow>到 <white>" + dest);
             }
 
             String files[] = src.list();
@@ -77,8 +76,6 @@ public class Util {
 
             in.close();
             out.close();
-
-            Common.log("<yellow>正在複製檔案... 由 <white>" + src + " <yellow>到 <white>" + dest);
         }
     }
 

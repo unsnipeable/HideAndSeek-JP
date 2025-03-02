@@ -1,6 +1,7 @@
 package rip.diamond.hideandseek.game;
 
 import lombok.Getter;
+import me.goodestenglish.api.util.Common;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
@@ -24,11 +25,9 @@ public class GameMap {
     }
 
     public void generateMap(Consumer<Boolean> callback) {
-        try {
-            if (world != null) {
-                Bukkit.unloadWorld(world, false);
-            }
+        Bukkit.unloadWorld("world_game", false);
 
+        try {
             Util.deleteFile(new File("world_game"));
             Util.copyFolder(new File("plugins/" + HideAndSeek.INSTANCE.getDescription().getName() + "/maps/" + HideAndSeek.INSTANCE.getGame().getSettings().getMap()), new File(Bukkit.getWorldContainer() + File.separator + "world_game"));
             world = Util.loadWorld("world_game");
