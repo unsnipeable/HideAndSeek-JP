@@ -15,17 +15,17 @@ public class CountdownCommand extends Command {
         String[] args = command.getArgs();
 
         if (HideAndSeek.INSTANCE.getGame().getSettings().getMap() == null) {
-            Common.sendMessage(player, "<red>嘗試開始倒數時發生錯誤: 地圖還沒選擇, 請使用指令 '/settings' 設置地圖");
+            Common.sendMessage(player, "<red>カウントダウンを開始しようとしたときにエラーが発生しました: マップがまだ選択されていません! '/settings'コマンドを使用してマップを選択してください！");
             return;
         }
 
         if (args.length == 1 && Checker.isInteger(args[0])) {
             HideAndSeek.INSTANCE.getGame().startCountdown(Integer.parseInt(args[0]));
 
-            Common.sendMessage(player, "<green>成功開始倒數");
+            Common.sendMessage(player, "<green>カウントダウンが始まります！");
             return;
         }
 
-        Common.sendMessage(player, "<red>指令用法: /countdown <int>");
+        Common.sendMessage(player, "<red>使い方: /countdown <int>");
     }
 }
