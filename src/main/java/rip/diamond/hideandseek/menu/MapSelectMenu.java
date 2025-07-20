@@ -25,7 +25,7 @@ public class MapSelectMenu extends PaginatedMenu {
 
     @Override
     public Component getPrePaginatedTitle(Player player) {
-        return Common.text("地圖選擇");
+        return Common.text("マップ選択");
     }
 
     @Override
@@ -41,7 +41,7 @@ public class MapSelectMenu extends PaginatedMenu {
             buttons.put(buttons.size(), new Button() {
                 @Override
                 public ItemStack getButtonItem(Player player) {
-                    return new ItemBuilder(Material.MAP).name("<green>" + file.getName()).lore("", mapsSelection.contains(file.getName()) ? "<yellow>點擊選擇該地圖!" : "<red>地圖尚未設置完成").build();
+                    return new ItemBuilder(Material.MAP).name("<green>" + file.getName()).lore("", mapsSelection.contains(file.getName()) ? "<yellow>クリックしてマップを選択してください!" : "<red>マップはまだ設定されていません").build();
                 }
 
                 @Override
