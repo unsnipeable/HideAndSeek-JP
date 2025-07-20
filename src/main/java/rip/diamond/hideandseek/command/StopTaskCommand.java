@@ -15,6 +15,6 @@ public class StopTaskCommand extends Command {
         HideAndSeek.INSTANCE.getGame().getCurrentTask().cancel();
         HideAndSeek.INSTANCE.getGame().setCurrentTask(null);
 
-        Common.sendMessage(player, "<green>已停止正在運行的BukkitTask");
+        Common.sendMessage(player, "<green>実行中のBukkitTaskを停止しました");
     }
 }
