@@ -37,18 +37,18 @@ public class Game {
 
     public void startCountdown(int seconds) {
         state = GameState.STARTING;
-        bossBar = new GlobalBossBar(BossBar.bossBar(Common.text("<yellow>準備開始倒數"), 1, BossBar.Color.YELLOW, BossBar.Overlay.PROGRESS), "game");
+        bossBar = new GlobalBossBar(BossBar.bossBar(Common.text("<yellow>準備時間"), 1, BossBar.Color.YELLOW, BossBar.Overlay.PROGRESS), "game");
         currentTask = new CountdownPhaseTask(seconds);
     }
 
     public void generateWorld() {
-        bossBar.name("<yellow>正在生成地圖").progress(1);
+        bossBar.name("<yellow>マップを生成しています").progress(1);
 
         map.generateMap(bool -> {
             if (bool) {
                 startInstructionPhase(10);
             } else {
-                Common.broadcastMessage("<red>在生成地圖的時候發生錯誤, 請聯繫管理員");
+                Common.broadcastMessage("<red>マップ生成中にエラーが発生しました。管理者に連絡してください。");
             }
         });
     }
@@ -70,13 +70,13 @@ public class Game {
             }
 
             if (gamePlayer.getDisguises() == null) {
-                Common.sendMessage(player, "<yellow>由於你沒有設置偽裝, 所以系統將會隨機幫你設置一個偽裝");
+                Common.sendMessage(player, "<yellow>変装を設定していないため、システムがランダムに変装を設定します");
                 gamePlayer.setDisguises(new DisguiseData());
             }
 
-            Common.sendMessage(player, "","<yellow>你現在是" + gamePlayer.getRole().getColoredName() + "<yellow>!");
+            Common.sendMessage(player, "","<yellow>あなたは今" + gamePlayer.getRole().getColoredName() + "<yellow>です!");
             if (gamePlayer.getRole().getGoal() != null) {
-                Common.sendMessage(player, "<yellow>獲勝目標: <dark_aqua>" + gamePlayer.getRole().getGoal());
+                Common.sendMessage(player, "<yellow>勝利条件: <dark_aqua>" + gamePlayer.getRole().getGoal());
             }
             Common.sendMessage(player, "");
         }
@@ -87,7 +87,7 @@ public class Game {
     public void startHiderPhase(int seconds) {
         state = GameState.HIDING_PHASE;
 
-        Common.broadcastMessage("","<yellow>遊戲已<green>開始<yellow>!",GameRole.HIDER.getColoredName() + "<yellow>，你們有<aqua>" + seconds + "秒<yellow>的時間去尋找適合的位置躲藏","");
+        Common.broadcastMessage("","<yellow>ゲームが<green>開始<yellow>されました!",GameRole.HIDER.getColoredName() + "<yellow>，隠れるのに適した場所を見つけるのに<aqua>" + seconds + "秒<yellow>かかりました!","");
         
         for (GamePlayer gamePlayer : players.values()) {
             Player player = gamePlayer.getPlayer();
@@ -108,7 +108,7 @@ public class Game {
     public void startSeekerPhase(int seconds) {
         state = GameState.SEEKER_PHASE;
 
-        Common.broadcastMessage("",GameRole.SEEKER.getColoredName() + "<yellow>已被釋放!","<yellow>如果" + GameRole.SEEKER.getColoredName() + "<yellow>在<aqua>" + (seconds >= 60 ? (seconds/60) + "分鐘" : seconds + "秒") + "<yellow>後還沒找到所有" + GameRole.HIDER.getColoredName() + "<yellow>," + GameRole.SEEKER.getColoredName() + "<yellow>將會獲勝!","<yellow>祝各位好運!","");
+        Common.broadcastMessage("",GameRole.SEEKER.getColoredName() + "<yellow>が解放されました!","<yellow>もし" + GameRole.SEEKER.getColoredName() + "<yellow>が<aqua>" + (seconds >= 60 ? (seconds/60) + "分" : seconds + "秒") + "<yellow>以内にすべての" + GameRole.HIDER.getColoredName() + "<yellow>を見つけることができなかった場合," + GameRole.SEEKER.getColoredName() + "<yellow>が勝利します!","<yellow>皆さんの幸運を祈る!","");
 
         for (GamePlayer gamePlayer : players.values()) {
             Player player = gamePlayer.getPlayer();
