@@ -15,16 +15,16 @@ public class StopDisguiseCommand extends Command {
         GamePlayer gamePlayer = HideAndSeek.INSTANCE.getGame().getGamePlayer(player);
 
         if (gamePlayer.getDisguises() == null) {
-            Common.sendMessage(player, "<red>你沒有一個 DisguiseData");
+            Common.sendMessage(player, "<red>DisguiseDataがありません");
             return;
         }
 
         if (gamePlayer.getDisguises().getDisguise() != null) {
-            Common.sendMessage(player, "<red>你沒有一個 Disguise");
+            Common.sendMessage(player, "<red>Disguiseしていません");
             return;
         }
 
         gamePlayer.getDisguises().getDisguise().stopDisguise();
-        Common.sendMessage(player, "<green>成功");
+        Common.sendMessage(player, "<green>成功しました");
     }
 }
