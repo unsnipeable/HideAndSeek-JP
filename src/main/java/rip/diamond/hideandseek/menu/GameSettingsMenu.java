@@ -20,7 +20,7 @@ import java.util.Map;
 public class GameSettingsMenu extends Menu {
     @Override
     public Component getTitle(Player player) {
-        return Common.text("遊戲設定");
+        return Common.text("ゲーム内設定");
     }
 
     @Override
@@ -31,12 +31,12 @@ public class GameSettingsMenu extends Menu {
         buttons.put(0, new ToggleButton() {
             @Override
             public String getOptionName() {
-                return "<green>自行選擇身份";
+                return "<green>隠れるブロックを選択";
             }
 
             @Override
             public String getDescription() {
-                return "<gray>是否應該讓玩家自行選擇身份?";
+                return "<gray>プレイヤーが自分の隠れるブロックを選択できるようにすべきでしょうか?";
             }
 
             @Override
@@ -54,7 +54,7 @@ public class GameSettingsMenu extends Menu {
         buttons.put(1, new Button() {
             @Override
             public ItemStack getButtonItem(Player player) {
-                return new ItemBuilder(Material.MAP).name("<green><bold>地圖").lore("","<gray>現時地圖: " + (game.getSettings().getMap() == null ? "<red>未設置" : "<green>" + game.getSettings().getMap()),"","<yellow>點擊選擇地圖").build();
+                return new ItemBuilder(Material.MAP).name("<green><bold>マップ").lore("","<gray>現在のマップ: " + (game.getSettings().getMap() == null ? "<red>未設定" : "<green>" + game.getSettings().getMap()),"","<yellow>クリックしてマップを選択").build();
             }
 
             @Override
@@ -71,17 +71,17 @@ public class GameSettingsMenu extends Menu {
 
             @Override
             public String getOptionName() {
-                return "最大尋找者人數";
+                return "鬼の人数の最大の";
             }
 
             @Override
             public String getDescription() {
-                return "設置最大尋找者的人數";
+                return "鬼側の最大数を設定する";
             }
 
             @Override
             public String getCurrentValue() {
-                return game.getSettings().getMaxSeekers() == -1 ? "<red>未設置" : game.getSettings().getMaxSeekers() + "";
+                return game.getSettings().getMaxSeekers() == -1 ? "<red>未設定" : game.getSettings().getMaxSeekers() + "";
             }
 
             @Override
