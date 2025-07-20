@@ -21,7 +21,7 @@ public class SeekerPhaseTask extends GameTask {
             Common.broadcastSound(Sound.UI_BUTTON_CLICK);
         }
 
-        game.getBossBar().name("<yellow>躲藏者將會在<aqua>" + (tick >= 60 ? (tick/60) + 1 + "分鐘" : tick + "秒") + "<yellow>後勝利").color(BossBar.Color.YELLOW).progress((float) tick / seconds);
+        game.getBossBar().name("<yellow>ハイダーは<aqua>" + (tick >= 60 ? (tick/60) + 1 + "分" : tick + "秒") + "<yellow>後に勝利します!").color(BossBar.Color.YELLOW).progress((float) tick / seconds);
     }
 
     @Override
