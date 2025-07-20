@@ -21,7 +21,7 @@ public class RoleSelectMenu extends Menu {
 
     @Override
     public Component getTitle(Player player) {
-        return Common.text("選擇身份");
+        return Common.text("ブロックを選択");
     }
 
     @Override
@@ -37,7 +37,7 @@ public class RoleSelectMenu extends Menu {
         buttons.put(11, new Button() {
             @Override
             public ItemStack getButtonItem(Player player) {
-                return new ItemBuilder(Material.COW_SPAWN_EGG).name(GameRole.HIDER.getColoredName()).lore("<gray>躲藏者需逃避尋找者的追殺", "<gray>並在限時之內沒被尋找者擊殺為勝利", "", gamePlayer.getRole() == GameRole.HIDER ? "<green>已選擇" : "<yellow>點擊設置身份為" + GameRole.HIDER.getColoredName()).glow(gamePlayer.getRole() == GameRole.HIDER).build();
+                return new ItemBuilder(Material.COW_SPAWN_EGG).name(GameRole.HIDER.getColoredName()).lore("<gray>ハイダーはシーカーから逃げなければなりません！", "<gray>制限時間内にシーカーに殺されなかったプレイヤーが勝者！", "", gamePlayer.getRole() == GameRole.HIDER ? "<green>選択済み" : "<yellow>「役職を選択」をクリック" + GameRole.HIDER.getColoredName()).glow(gamePlayer.getRole() == GameRole.HIDER).build();
             }
 
             @Override
@@ -50,7 +50,7 @@ public class RoleSelectMenu extends Menu {
         buttons.put(15, new Button() {
             @Override
             public ItemStack getButtonItem(Player player) {
-                return new ItemBuilder(Material.DIAMOND_SWORD).name(GameRole.SEEKER.getColoredName()).lore("<gray>尋找者需要在限時之內找到所有的躲藏者", "", gamePlayer.getRole() == GameRole.SEEKER ? "<green>已選擇" : "<yellow>點擊設置身份為" + GameRole.SEEKER.getColoredName()).glow(gamePlayer.getRole() == GameRole.SEEKER).build();
+                return new ItemBuilder(Material.DIAMOND_SWORD).name(GameRole.SEEKER.getColoredName()).lore("<gray>シーカーは制限時間内にハイダー全員を見つけなければなりません！", "", gamePlayer.getRole() == GameRole.SEEKER ? "<green>選択済み" : "<yellow>「役職を選択」をクリック" + GameRole.SEEKER.getColoredName()).glow(gamePlayer.getRole() == GameRole.SEEKER).build();
             }
 
             @Override
@@ -67,14 +67,14 @@ public class RoleSelectMenu extends Menu {
         Game game = HideAndSeek.INSTANCE.getGame();
         Player player = gamePlayer.getPlayer();
         if (game.isStarted()) {
-            Common.sendMessage(player, "<red>你不能在遊戲開始後設置身份");
+            Common.sendMessage(player, "<red>ゲーム開始後に自分の役職を設定することはできません");
             return;
         }
         if (!game.getSettings().isAllowPublicRoleSelect()) {
-            Common.sendMessage(player, "<red>你不能夠選擇身份, 因為主辦沒有開啟公開選擇隊伍");
+            Common.sendMessage(player, "<red>ホストがオープンチーム選択を有効にしていないため、役職を選択できません");
             return;
         }
         gamePlayer.setRole(role);
-        Common.sendMessage(player, "<yellow>已把你的身份設置為: " + role.getColoredName());
+        Common.sendMessage(player, "<yellow>あなたの役職: " + role.getColoredName());
     }
 }
