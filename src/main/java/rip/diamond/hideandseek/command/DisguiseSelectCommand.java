@@ -14,7 +14,7 @@ public class DisguiseSelectCommand extends Command {
         Player player = command.getPlayer();
 
         if (HideAndSeek.INSTANCE.getGame().getSettings().getMap() == null) {
-            Common.sendMessage(player, "<red>主辦必須要先選擇一個地圖才能選擇偽裝!");
+            Common.sendMessage(player, "<red>ホストは変装を選択する前にマップを選択する必要があります!");
             return;
         }
 
