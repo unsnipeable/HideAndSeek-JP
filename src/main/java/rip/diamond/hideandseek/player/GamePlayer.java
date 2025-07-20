@@ -27,7 +27,7 @@ public class GamePlayer {
 
     public void setDisguises(DisguiseData disguises) {
         this.disguises = disguises;
-        Common.sendMessage(getPlayer(), "<yellow>如果你是躲藏者, 你將會在遊戲裏偽裝成為<aqua>" + disguises.getData() + "<yellow>!");
+        Common.sendMessage(getPlayer(), "<aqua>もしあなたが隠れる側なら、" + disguises.getData() + "<yellow>に変身されます!");
     }
 
     public Player getPlayer() {
