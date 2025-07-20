@@ -22,7 +22,7 @@ public class InstructionPhaseTask extends GameTask {
             Common.broadcastSound(Sound.UI_BUTTON_CLICK);
         }
 
-        game.getBossBar().name("<yellow>ハイダーは<aqua>" + (tick >= 60 ? (tick/60) + 1 + "分" : tick + "秒") + "<yellow>後に隠れ場所を探します").color(BossBar.Color.YELLOW).progress((float) tick / seconds);
+        game.getBossBar().name("<yellow>ハイダーは<aqua>" + (tick >= 60 ? (tick/60) + 1 + "分" : tick + "秒") + "<yellow>後に隠れ場所を探しはじめます!").color(BossBar.Color.YELLOW).progress((float) tick / seconds);
     }
 
     @Override
