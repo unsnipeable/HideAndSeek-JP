@@ -22,7 +22,7 @@ public class CountdownPhaseTask extends GameTask {
             Common.broadcastSound(Sound.UI_BUTTON_CLICK);
         }
 
-        game.getBossBar().name("<yellow>遊戲將會在<aqua>" + (tick >= 60 ? (tick/60) + 1 + "分鐘" : tick + "秒") + "<yellow>後開始").color(BossBar.Color.YELLOW).progress((float) tick / seconds);
+        game.getBossBar().name("<yellow>この試合は<aqua>" + (tick >= 60 ? (tick/60) + 1 + "分" : tick + "秒") + "<yellow>後に開始します").color(BossBar.Color.YELLOW).progress((float) tick / seconds);
     }
 
     @Override
