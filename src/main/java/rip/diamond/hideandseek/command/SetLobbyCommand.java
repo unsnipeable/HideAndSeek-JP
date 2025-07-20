@@ -21,6 +21,6 @@ public class SetLobbyCommand extends Command {
         HideAndSeek.INSTANCE.getConfigFile().getConfiguration().set("lobby-location", LocationSerialization.serializeLocation(location));
         HideAndSeek.INSTANCE.getConfigFile().save();
 
-        Common.sendMessage(player, "<green>成功更新大廳位置");
+        Common.sendMessage(player, "<green>ロビーを設定しました!");
     }
 }
