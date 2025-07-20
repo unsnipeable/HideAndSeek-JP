@@ -22,7 +22,7 @@ public class HiderPhaseTask extends GameTask {
             Common.broadcastSound(Sound.UI_BUTTON_CLICK);
         }
 
-        game.getBossBar().name("<yellow>尋找者將會在<aqua>" + (tick >= 60 ? (tick/60) + 1 + "分鐘" : tick + "秒") + "<yellow>後開始尋找躲藏者").color(BossBar.Color.YELLOW).progress((float) tick / seconds);
+        game.getBossBar().name("<yellow>シーカーは<aqua>" + (tick >= 60 ? (tick/60) + 1 + "分" : tick + "秒") + "<yellow>後にハイダーを探し始めます!").color(BossBar.Color.YELLOW).progress((float) tick / seconds);
     }
 
     @Override
