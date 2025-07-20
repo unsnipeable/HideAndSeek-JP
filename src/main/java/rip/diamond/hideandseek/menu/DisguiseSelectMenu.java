@@ -20,7 +20,7 @@ import java.util.Map;
 public class DisguiseSelectMenu extends PaginatedMenu {
     @Override
     public Component getPrePaginatedTitle(Player player) {
-        return Common.text("偽裝選擇");
+        return Common.text("変装の選択");
     }
 
     @Override
@@ -36,7 +36,7 @@ public class DisguiseSelectMenu extends PaginatedMenu {
             buttons.put(buttons.size(), new Button() {
                 @Override
                 public ItemStack getButtonItem(Player player) {
-                    return new ItemBuilder(Material.valueOf(block)).name("<green>" + block).lore("", "<yellow>點擊選擇偽裝成為該方塊!").build();
+                    return new ItemBuilder(Material.valueOf(block)).name("<green>" + block).lore("", "<yellow>偽装するにはブロックにクリックしてください!").build();
                 }
 
                 @Override
@@ -51,7 +51,7 @@ public class DisguiseSelectMenu extends PaginatedMenu {
             buttons.put(buttons.size(), new Button() {
                 @Override
                 public ItemStack getButtonItem(Player player) {
-                    return new ItemBuilder(Material.valueOf(mob + "_SPAWN_EGG")).name("<green>" + mob).lore("", "<yellow>點擊選擇偽裝成為該生物!").build();
+                    return new ItemBuilder(Material.valueOf(mob + "_SPAWN_EGG")).name("<green>" + mob).lore("", "<yellow>変装するにはMOBにクリックしてください!").build();
                 }
 
                 @Override
