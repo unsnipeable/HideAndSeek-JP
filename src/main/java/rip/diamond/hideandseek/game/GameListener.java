@@ -37,7 +37,7 @@ public class GameListener implements Listener {
         Game game = HideAndSeek.INSTANCE.getGame();
 
         if (game.isStarted()) {
-            event.disallow(AsyncPlayerPreLoginEvent.Result.KICK_OTHER, Common.text("<red>遊戲已開始, 無法進入"));
+            event.disallow(AsyncPlayerPreLoginEvent.Result.KICK_OTHER, Common.text("<red>ゲームは開始されましたが、参加できていません"));
         }
     }
 
@@ -135,15 +135,16 @@ public class GameListener implements Listener {
         Player player = event.getPlayer();
         GamePlayer gamePlayer = game.getGamePlayer(player);
 
-        Common.broadcastMessage(gamePlayer.getRole().getColor() + player.getName() + "<red>已被擊殺，變成了" + GameRole.SEEKER.getColoredName());
+        Common.broadcastMessage(gamePlayer.getRole().getColor() + player.getName() + "<red>は倒され，" + GameRole.SEEKER.getColoredName() + " <red>になりました!");
 
         gamePlayer.getDisguises().getDisguise().stopDisguise();
         gamePlayer.setRole(GameRole.SEEKER);
         game.getMap().teleport(player);
         player.getInventory().setContents(GameRole.SEEKER.getTools());
 
-        Common.sendMessage(player, "","<yellow>基於你已被" + GameRole.SEEKER.getColoredName() + "<yellow>發現，你現在是" + gamePlayer.getRole().getColoredName() + "<yellow>!");
-        Common.sendMessage(player, "<yellow>獲勝目標: <dark_aqua>" + gamePlayer.getRole().getGoal());
+        Common.sendMessage(player, "","<yellow>あなたは " + GameRole.SEEKER.getColoredName() + "<yellow> に見つかってしまったため、 " + gamePlayer.getRole().getColoredName() + "<yellow> になりました！"
+);
+        Common.sendMessage(player, "<yellow>勝利条件: <dark_aqua>" + gamePlayer.getRole().getGoal());
 
         if (game.canEnd()) {
             game.end();
@@ -257,7 +258,7 @@ public class GameListener implements Listener {
                         BoundingBox box = block.getBoundingBox();
 
                         if (box.getVolume() != 1) {
-                            Common.sendMessage(player, "<red>你只能變身成為一個完整的方塊!");
+                            Common.sendMessage(player, "<red>完全なブロックにのみ変形できます!");
                             return;
                         }
 
@@ -265,11 +266,11 @@ public class GameListener implements Listener {
                         gamePlayer.getDisguises().setType(DisguiseTypes.BLOCK);
                         gamePlayer.getDisguises().setData(block.getType().name());
                         gamePlayer.getDisguises().setDisguise(Util.disguise(player));
-                        Common.sendMessage(player, "<yellow>你已變身成為 <aqua>" + block.getType().name());
+                        Common.sendMessage(player, "<yellow>あなたは <aqua>" + block.getType().name() + "<yellow> に変身しました！");
                     } else if (itemStack.equals(Items.TELEPORT_TOOL.getItem())) {
                         Location blockLoc = player.getLocation().getBlock().getLocation().clone();
                         player.teleport(new Location(blockLoc.getWorld(), blockLoc.getX() + 0.5, blockLoc.getY(), blockLoc.getZ() + 0.5, player.getLocation().getYaw(), player.getLocation().getPitch()));
-                        Common.sendMessage(player, "<yellow>已成功固定!");
+                        Common.sendMessage(player, "<yellow>正常に固定されました!");
                     }
                 }
             }
