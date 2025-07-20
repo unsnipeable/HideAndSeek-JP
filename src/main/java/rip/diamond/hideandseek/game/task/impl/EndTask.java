@@ -25,13 +25,13 @@ public class EndTask extends GameTask {
     public void preRun() {
         Common.broadcastMessage(
                 "",
-                "<yellow>遊戲結束!",
-                winner.getColoredName() + "<green>獲勝!",
-                winner.getColoredName() + "<yellow>成員包括: <aqua>" + game.getPlayers().values().stream().filter(gp -> gp.getRole() == winner).map(gp -> gp.getPlayer().getName()).collect(Collectors.joining("<gray>, <aqua>")),
+                "<yellow>ゲームオーバー!",
+                winner.getColoredName() + "<green>が勝利しました!",
+                winner.getColoredName() + "<yellow>そのチームのメンバー: <aqua>" + game.getPlayers().values().stream().filter(gp -> gp.getRole() == winner).map(gp -> gp.getPlayer().getName()).collect(Collectors.joining("<gray>, <aqua>")),
                 ""
         );
 
-        game.getBossBar().name("<green>遊戲結束! " + winner.getColoredName() + "<green>獲勝!").color(BossBar.Color.GREEN).progress(1);
+        game.getBossBar().name("<green>ゲームオーバー! " + winner.getColoredName() + "<green>の勝利!").color(BossBar.Color.GREEN).progress(1);
     }
 
     @Override
