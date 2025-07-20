@@ -21,7 +21,7 @@ public class RoleSelectAdminMenu extends PaginatedMenu {
 
     @Override
     public Component getPrePaginatedTitle(Player player) {
-        return Common.text("設置玩家身份");
+        return Common.text("プレイヤーIDを設定する");
     }
 
     @Override
@@ -35,7 +35,7 @@ public class RoleSelectAdminMenu extends PaginatedMenu {
             ItemBuilder builder = new ItemBuilder(Material.PLAYER_HEAD).headTexture(HeadUtil.getValue(player)).name(role.getColor() + player.getName());
             builder.lore("");
             builder.lore(Arrays.stream(GameRole.values()).map(gr -> (role == gr ? " <green>" + Symbols.ARROW_RIGHT + " " : "   ") + gr.getColoredName()).toList());
-            builder.lore("", "<yellow>點擊切換 " + player.getName() + " 的身份");
+            builder.lore("", "<yellow>クリックして切り替える: " + player.getName() + "");
 
             buttons.put(buttons.size(), new Button() {
                 @Override
@@ -68,19 +68,19 @@ public class RoleSelectAdminMenu extends PaginatedMenu {
         buttons.put(3, new Button() {
             @Override
             public ItemStack getButtonItem(Player player) {
-                return new ItemBuilder(Material.STRUCTURE_VOID).name("<yellow>" + GameRole.NONE + "人數: <aqua>" + HideAndSeek.INSTANCE.getGame().getPlayers().values().stream().filter(gp -> gp.getRole() == GameRole.NONE).count()).build();
+                return new ItemBuilder(Material.STRUCTURE_VOID).name("<yellow>" + GameRole.NONE + "人数: <aqua>" + HideAndSeek.INSTANCE.getGame().getPlayers().values().stream().filter(gp -> gp.getRole() == GameRole.NONE).count()).build();
             }
         });
         buttons.put(4, new Button() {
             @Override
             public ItemStack getButtonItem(Player player) {
-                return new ItemBuilder(Material.COW_SPAWN_EGG).name("<yellow>" + GameRole.HIDER + "人數: <aqua>" + HideAndSeek.INSTANCE.getGame().getPlayers().values().stream().filter(gp -> gp.getRole() == GameRole.HIDER).count()).build();
+                return new ItemBuilder(Material.COW_SPAWN_EGG).name("<yellow>" + GameRole.HIDER + "人数: <aqua>" + HideAndSeek.INSTANCE.getGame().getPlayers().values().stream().filter(gp -> gp.getRole() == GameRole.HIDER).count()).build();
             }
         });
         buttons.put(5, new Button() {
             @Override
             public ItemStack getButtonItem(Player player) {
-                return new ItemBuilder(Material.DIAMOND_SWORD).name("<yellow>" + GameRole.SEEKER + "人數: <aqua>" + HideAndSeek.INSTANCE.getGame().getPlayers().values().stream().filter(gp -> gp.getRole() == GameRole.SEEKER).count()).build();
+                return new ItemBuilder(Material.DIAMOND_SWORD).name("<yellow>" + GameRole.SEEKER + "人数: <aqua>" + HideAndSeek.INSTANCE.getGame().getPlayers().values().stream().filter(gp -> gp.getRole() == GameRole.SEEKER).count()).build();
             }
         });
 
