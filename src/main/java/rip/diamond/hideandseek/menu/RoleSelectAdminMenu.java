@@ -21,7 +21,7 @@ public class RoleSelectAdminMenu extends PaginatedMenu {
 
     @Override
     public Component getPrePaginatedTitle(Player player) {
-        return Common.text("プレイヤーIDを設定する");
+        return Common.text("ロールを設定する");
     }
 
     @Override
